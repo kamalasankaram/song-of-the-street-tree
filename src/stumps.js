@@ -23,13 +23,16 @@ export const stumps = [
     lat: 40.8923, lng: -73.9119,
     species: 'Red Oak', latin: 'Quercus rubra',
     loc: 'Independence Ave & W 246th St', borough: 'Bronx',
-    inDB: false, rings: null,
+    inDB: false, rings: 28,
     scan: 'Polycam LiDAR / iPhone 16 Pro Max',
     duration: '22:00 — LP side at 33⅓ RPM',
     anatomy: [['Ring-porous', true], ['Janka 1290 lbf'], ['Large earlywood pores']],
     ringStyle: 'ring',
     video: null,
-    audio: null,
+    audio: {
+      indexical: 'media/red-oak-indexical.mp3',
+      metaphorical: 'media/red-oak-metaphorical.mp3',
+    },
   },
 ];
 
