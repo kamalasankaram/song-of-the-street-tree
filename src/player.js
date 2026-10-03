@@ -78,12 +78,21 @@ function connect(p) {
   applyXfade(p);
 }
 
+// The last 5% of the slider at each end is fully one track. On a phone the
+// thumb rarely lands exactly on 0 or 1, and even 2% of the other track is
+// clearly audible.
+const XFADE_END = 0.05;
+
 function applyXfade(p) {
   if (!p.gains) return;
   // Equal-power crossfade: 0 = all indexical, 1 = all metaphorical.
+  const x = Math.min(1, Math.max(0, (p.xfade - XFADE_END) / (1 - 2 * XFADE_END)));
   const t = getContext().currentTime;
-  p.gains.idx.gain.setTargetAtTime(Math.cos(p.xfade * Math.PI / 2), t, 0.02);
-  p.gains.met.gain.setTargetAtTime(Math.sin(p.xfade * Math.PI / 2), t, 0.02);
+  p.gains.idx.gain.setTargetAtTime(x >= 1 ? 0 : Math.cos(x * Math.PI / 2), t, 0.02);
+  p.gains.met.gain.setTargetAtTime(x <= 0 ? 0 : Math.sin(x * Math.PI / 2), t, 0.02);
+  // Belt and braces: silence the element itself at the ends too.
+  p.idx.muted = x >= 1;
+  p.met.muted = x <= 0;
 }
 
 export function setXfade(id, value) {
