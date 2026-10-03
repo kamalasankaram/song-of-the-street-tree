@@ -10,6 +10,9 @@ import 'leaflet/dist/leaflet.css';
 import './styles.css';
 
 import L from 'leaflet';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { setWorkerUrl } from 'maplibre-gl';
+import { maplibreGL } from '@maplibre/maplibre-gl-leaflet';
 import { stumps, RING_POROUS, fundamental } from './stumps.js';
 import { registerStump, toggle, setXfade, onPlayerChange, getState, fmt } from './player.js';
 
@@ -104,10 +107,15 @@ function addCard(t, i) {
 
 // ── Map ─────────────────────────────────────────────────────────────────────
 const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([40.8900, -73.9130], 15);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-  subdomains: 'abcd',
-  maxZoom: 19,
+// Basemap: OpenFreeMap's Positron style (the same light look as the prototype's
+// CARTO tiles). CARTO refuses requests from inside the app (capacitor://
+// origin) without a key; OpenFreeMap needs no key and allows app use.
+setWorkerUrl(new URL(import.meta.env.DEV
+  ? '/node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs'
+  : 'maplibre/maplibre-gl-worker.mjs', document.baseURI).href);
+maplibreGL({
+  style: 'https://tiles.openfreemap.org/styles/positron',
+  attribution: '<a href="https://openfreemap.org" target="_blank">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/" target="_blank">OpenMapTiles</a> Data from <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
 }).addTo(map);
 
 function makeIcon(color) {
