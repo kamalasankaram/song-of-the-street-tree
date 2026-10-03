@@ -18,6 +18,9 @@ const players = new Map(); // stumpId -> player
 const listeners = new Set();
 
 function getContext() {
+  // Same as AppDelegate's .playback category, for Safari and the web preview:
+  // don't let the silent switch mute live synthesis.
+  if (navigator.audioSession) navigator.audioSession.type = 'playback';
   if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
   return ctx;
 }
