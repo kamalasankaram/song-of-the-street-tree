@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Song of the Street Tree</title>
+  <script type="module" crossorigin src="./assets/index-D8M0RCKW.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CBd93opu.css">
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-photo" id="hero-photo"></div>
+  <div class="hero-overlay"></div>
+  <svg class="hero-rings" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="90" stroke-width="0.8"/>
+    <circle cx="100" cy="100" r="74" stroke-width="0.8"/>
+    <circle cx="100" cy="100" r="58" stroke-width="1.2"/>
+    <circle cx="100" cy="100" r="42" stroke-width="0.8"/>
+    <circle cx="100" cy="100" r="26" stroke-width="1.2"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-label">Sound Art · Environmental Art · New York City</div>
+    <h1>Song of the<br>Street Tree</h1>
+    <div class="byline">A project by Kamala Sankaram</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="concept">
+    <div>
+      <div class="concept-label">The Project</div>
+      <div class="concept-title">Every stump holds a record waiting to be played.</div>
+    </div>
+    <div class="concept-body" id="concept-text">
+      <p>When a New York City street tree is cut down, it leaves behind a stump — a cross-section of its entire life, written in wood. The annual rings are a timeline: each year's growth encoded in alternating bands of early and late wood, hard and soft, dense and open.</p>
+      <p><em>Song of the Street Tree</em> scans these stumps using LiDAR technology and converts their three-dimensional surface topology directly into audio. The scan traces a spiral inward — as a record needle would — reading the stump's surface as sound.</p>
+      <p>Each stump yields two tracks. The <strong>indexical track</strong> is the stump's raw surface geometry made audible — the tree's own data, unmediated. The <strong>metaphorical track</strong> derives a fundamental pitch from the tree's ring count, with the wood grain shaping its harmonic resonance. Use the crossfader below to move between them.</p>
+    </div>
+  </div>
+
+  <div class="map-section">
+    <div class="section-head">
+      <h2>Stump Locations</h2>
+      <span class="count">Riverdale, The Bronx</span>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <div class="section-head" style="margin-top:2rem;">
+    <h2>Field Recordings</h2>
+    <span class="count" id="tree-count"></span>
+  </div>
+
+  <div class="tree-grid" id="tree-grid">
+  </div>
+
+  <!-- Add tree -->
+  <div class="add-section">
+    <div class="section-head" style="border:none; padding-top:0;"><h2>Add a Tree Record</h2></div>
+    <div class="add-form">
+      <h3>Submit a new stump</h3>
+      <p class="form-note">Add a scanned stump to the archive. Species and address are required.</p>
+      <div class="field">
+        <label>Species *</label>
+        <select id="f-species">
+          <option value="">— select species —</option>
+          <optgroup label="Diffuse-porous">
+            <option>Silver Linden</option><option>Littleleaf Linden</option>
+            <option>Ginkgo</option><option>Silver Maple</option>
+            <option>London Planetree</option><option>Sweetgum</option>
+            <option>Cherry</option><option>Red Maple</option>
+            <option>Norway Maple</option><option>Japanese Pagoda Tree</option>
+            <option>Callery Pear</option><option>American Hornbeam</option>
+          </optgroup>
+          <optgroup label="Ring-porous">
+            <option>American Elm</option><option>Japanese Zelkova</option>
+            <option>Pin Oak</option><option>Black Oak</option><option>Red Oak</option>
+            <option>Honeylocust</option><option>Black Locust</option>
+          </optgroup>
+          <optgroup label="Other"><option>Unknown / Other</option></optgroup>
+        </select>
+      </div>
+      <div class="field">
+        <label>Street Address *</label>
+        <input type="text" id="f-address" placeholder="e.g. Independence Ave &amp; W 235th St">
+      </div>
+      <div class="field">
+        <label>Borough *</label>
+        <select id="f-borough">
+          <option value="">— select —</option>
+          <option>The Bronx</option><option>Brooklyn</option>
+          <option>Manhattan</option><option>Queens</option><option>Staten Island</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Ring Count</label>
+        <input type="number" id="f-rings" placeholder="e.g. 32" min="1" max="500">
+      </div>
+      <div class="field">
+        <label>In NYC Tree Database?</label>
+        <select id="f-db">
+          <option value="yes">Yes — in database</option>
+          <option value="no">No — unregistered stump</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Polycam Video URL (optional)</label>
+        <input type="text" id="f-video" placeholder="https://poly.cam/capture/...">
+      </div>
+      <div class="field full">
+        <label>Notes (optional)</label>
+        <input type="text" id="f-notes" placeholder="Trunk diameter, condition, anything notable">
+      </div>
+      <button class="add-btn" id="add-btn">Add to Archive →</button>
+    </div>
+  </div>
+
+  <!-- Method -->
+  <div class="method">
+    <div>
+      <div class="concept-label">Method</div>
+      <div class="concept-title">How a stump becomes sound</div>
+    </div>
+    <div class="method-steps">
+      <div class="step"><span class="step-num">01</span><span class="step-text"><strong style="color:var(--dark)">LiDAR Scan.</strong> Each stump is scanned using Polycam on an iPhone 16 Pro Max, producing a dense three-dimensional mesh of the cut surface.</span></div>
+      <div class="step"><span class="step-num">02</span><span class="step-text"><strong style="color:var(--dark)">Ring Detection.</strong> The mesh is analyzed radially to detect annual ring boundaries, which become waypoints for the spiral path.</span></div>
+      <div class="step"><span class="step-num">03</span><span class="step-text"><strong style="color:var(--dark)">Indexical Track.</strong> A virtual stylus spirals inward at 33⅓ RPM. Surface height is read directly as audio amplitude. Nothing is synthesized.</span></div>
+      <div class="step"><span class="step-num">04</span><span class="step-text"><strong style="color:var(--dark)">Metaphorical Track.</strong> The ring count becomes a fundamental pitch (rings × 8 Hz). Wood grain shapes the harmonic resonance above it. The crossfader lets you move between both.</span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>Song of the Street Tree &nbsp;·&nbsp; Kamala Sankaram &nbsp;·&nbsp; Riverdale, Bronx, NYC</span>
+    <span id="footer-count"></span>
+  </div>
+</footer>
+
+</body>
+</html>
