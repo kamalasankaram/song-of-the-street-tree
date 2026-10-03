@@ -229,6 +229,18 @@
   .field.full { grid-column: 1/-1; }
   .add-btn { grid-column: 1/-1; background: var(--moss); border: none; color: #f1e3c8; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.75rem; cursor: pointer; transition: background 0.2s; margin-top: 0.3rem; }
   .add-btn:hover { background: var(--dark); }
+  .add-btn:disabled { opacity: 0.45; cursor: default; }
+  .add-btn:disabled:hover { background: var(--moss); }
+  .field .form-note, .add-form #add-status { margin: 0; }
+  .photo-picker { width: 100%; max-height: 70vh; object-fit: contain; background: #2a2725; touch-action: manipulation; cursor: crosshair; }
+  .link-btn { align-self: flex-start; background: none; border: none; padding: 0.3rem 0; color: var(--moss); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-decoration: underline; cursor: pointer; }
+  .suggest-list { display: flex; flex-direction: column; gap: 0.4rem; }
+  .suggest-item { text-align: left; background: var(--panel); border: 1px solid var(--border); padding: 0.55rem 0.7rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; color: var(--text); cursor: pointer; }
+  .suggest-item.chosen { border-color: var(--moss); background: #eef0e4; }
+  .suggest-item small { display: block; color: var(--muted); font-size: 0.66rem; margin-top: 0.15rem; }
+  .card-photo { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; display: block; max-width: 160px; margin-bottom: 0.8rem; }
+  .popup-photo { width: 100%; display: block; border-radius: 4px; margin: 0.4rem 0; }
+  .card-remove { margin-top: 0.6rem; }
 
   /* ── Method ── */
   .method { padding: 3rem 0; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; }

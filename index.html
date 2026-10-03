@@ -54,16 +54,33 @@
   <div class="tree-grid" id="tree-grid">
   </div>
 
-  <!-- Add tree -->
+  <!-- Add a stump from a photo -->
   <div class="add-section">
-    <div class="section-head" style="border:none; padding-top:0;"><h2>Add a Tree Record</h2></div>
+    <div class="section-head" style="border:none; padding-top:0;"><h2>Add a Stump</h2></div>
     <div class="add-form">
-      <h3>Submit a new stump</h3>
-      <p class="form-note">Add a scanned stump to the archive. Species and address are required.</p>
+      <h3>Make a record from a photo</h3>
+      <p class="form-note">Stand over the stump and photograph its cut face from directly above, filling the frame. Your phone reads the photo and makes its sound. Stumps you add are saved on this phone for now.</p>
+      <div class="field full">
+        <label for="f-photo">1 · Photo of the cut face</label>
+        <input type="file" id="f-photo" accept="image/*">
+      </div>
+      <div class="field full" id="picker-wrap" hidden>
+        <label id="picker-hint">2 · Tap the centre of the stump</label>
+        <canvas id="picker" class="photo-picker"></canvas>
+        <button type="button" class="link-btn" id="picker-redo">Start the circle again</button>
+      </div>
+      <div class="field full" id="loc-wrap" hidden>
+        <label>Where it is</label>
+        <div class="form-note" id="loc-text"></div>
+        <button type="button" class="link-btn" id="loc-btn">Use my current location</button>
+      </div>
+      <div class="field full" id="suggest-wrap" hidden>
+        <label>Species · nearby removed trees on NYC Parks' tree map</label>
+        <div class="suggest-list" id="suggest"></div>
+      </div>
       <div class="field">
-        <label>Species *</label>
+        <label for="f-species">Species</label>
         <select id="f-species">
-          <option value="">— select species —</option>
           <optgroup label="Diffuse-porous">
             <option>Silver Linden</option><option>Littleleaf Linden</option>
             <option>Ginkgo</option><option>Silver Maple</option>
@@ -77,42 +94,31 @@
             <option>Pin Oak</option><option>Black Oak</option><option>Red Oak</option>
             <option>Honeylocust</option><option>Black Locust</option>
           </optgroup>
-          <optgroup label="Other"><option>Unknown / Other</option></optgroup>
+          <optgroup label="Other"><option selected>Unknown / Other</option></optgroup>
         </select>
       </div>
       <div class="field">
-        <label>Street Address *</label>
-        <input type="text" id="f-address" placeholder="e.g. Independence Ave &amp; W 235th St">
+        <label for="f-rings">Ring Count</label>
+        <input type="number" id="f-rings" placeholder="found from the photo" min="1" max="500">
       </div>
       <div class="field">
-        <label>Borough *</label>
+        <label for="f-address">Street Address (optional)</label>
+        <input type="text" id="f-address" placeholder="e.g. W 236th St &amp; Hudson Manor Terrace">
+      </div>
+      <div class="field">
+        <label for="f-borough">Borough (optional)</label>
         <select id="f-borough">
           <option value="">— select —</option>
           <option>The Bronx</option><option>Brooklyn</option>
           <option>Manhattan</option><option>Queens</option><option>Staten Island</option>
         </select>
       </div>
-      <div class="field">
-        <label>Ring Count</label>
-        <input type="number" id="f-rings" placeholder="e.g. 32" min="1" max="500">
-      </div>
-      <div class="field">
-        <label>In NYC Tree Database?</label>
-        <select id="f-db">
-          <option value="yes">Yes — in database</option>
-          <option value="no">No — unregistered stump</option>
-          <option value="unknown">Unknown</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Polycam Video URL (optional)</label>
-        <input type="text" id="f-video" placeholder="https://poly.cam/capture/...">
-      </div>
       <div class="field full">
-        <label>Notes (optional)</label>
+        <label for="f-notes">Notes (optional)</label>
         <input type="text" id="f-notes" placeholder="Trunk diameter, condition, anything notable">
       </div>
-      <button class="add-btn" id="add-btn">Add to Archive →</button>
+      <button class="add-btn" id="add-btn" disabled>Make its sound →</button>
+      <div class="form-note" id="add-status" role="status"></div>
     </div>
   </div>
 

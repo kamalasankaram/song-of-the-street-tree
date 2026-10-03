@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Take a photo of a stump's cut face to turn it into sound.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Choose a photo of a stump's cut face to turn it into sound.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Place the stump on the map and suggest its species from the city's tree records.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
