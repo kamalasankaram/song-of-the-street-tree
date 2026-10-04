@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "sync": "vite build && cap sync"
+    "sync": "vite build && cap sync",
+    "test": "node --test test/*.test.mjs",
+    "render": "node scripts/render.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",
